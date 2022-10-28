@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel = 'stylesheet' href = 'js.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+    <title>두근두근 미신시</title>
+</head>
+<body class="body1">
+    <!----- pys-onClick은 파이썬 함수 실행----->
+
+    <div class = 'start' id = 'start'>
+        <div class = 'start11'>
+            
+        </div>
+        <button onclick="군인()" class="button1">의무군인(1년 6개월)</button><br></br>
+        <button onclick="직업군인()" class="button2">직업군인</button>
+    </div>
+    <div class = 'start-1' id = 'start-1'>
+        
+        <p class="thep1">몇 급을 원하시나요?</p>
+        <p>1 ~ 3급: 현역입대</p>
+        <p>4급: 보충역(공익, 훈련받아야함)</p>
+        <p>5급: 전시근로역(전쟁시, 근로역)</p>
+        <p>6급: 병역문제</p>    
+        
+        <input style = 'align-items: center;' name = 'grde' type="number" placeholder = "숫자로 입력" min = '1' max="7" id = 'grade' class = 'grade'><br></br>
+        <button onclick="희망등급()" class="grader">다음</button>        
+    </div>
+    <div id = 'step1'>
+        <div class = 'step1'></div>
+        <p>키가 몇이신가요?</p>
+        <input type="number"  placeholder="cm단위로 입력" id = "height">
+        <p>몸무게가 몇인가요?</p>
+        <input type="number"  placeholder="kg단위로 입력" id = "weight">
+        <button onclick="final()" class="button1">다음</button>
+    </div>
+    
+    <div id = 'final'>
+        <div class ='result'></div>
+        <button class = 'button1' onclick="결과()">결과보기</button>
+
+        <div id = 'result1'></div>
+        <div id = 'no_army'></div>
+        <div id = "army"></div>
+        <button class = 'button1' onclick="홈으로()">홈 화면으로</button>  
+        
+    </div>
+    <script>
+        document.getElementById('step1').style.display='none';
+        document.getElementById('final').style.display='none';
+        document.getElementById('start-1').style.display='none';
+        document.getElementById('no_army').style.display='none';
+        document.getElementById('army').style.display='none';
+        document.getElementById('result1').style.display = 'none';
+
+        
+        function 홈으로(){
+            document.getElementById('final').style.display='none';
+            document.getElementById('start').style.display='block';
+            document.getElementById('result1').style.display = 'none';
+            document.getElementById('army').style.display = 'none';
+            document.getElementById('no_army').style.display = 'none';
+        }
+        function 군인(){
+            document.getElementById('start').style.display= 'none';
+            document.getElementById('start-1').style.display= 'block';
+        }
+        function 직업군인(){
+            alert('준비중');
+        }
+        
+        function 희망등급(){
+            var f = document.getElementById('grade').value;
+            if(f <= 6 && f >= 1 ){
+                
+                document.getElementById('start-1').style.display='none';
+                document.getElementById('step1').style.display='block';
+            }
+            else{
+                alert('원하시는 등급을 입력해주세요');
+            }
+        }
+        function final(){
+            var hei = document.getElementById('height').value;
+            var wei = document.getElementById('weight').value;
+            
+            if (hei == '' && wei ==''){
+                alert('키나 몸무게를 다시 입력해주세요')
+            }
+            else{
+            document.getElementById('step1').style.display='none';
+            document.getElementById('final').style.display='block';
+            }
+            
+
+            
+        }
+        function 결과(){
+            var hei = document.getElementById('height').value;
+            var wei = document.getElementById('weight').value;
+            var bmi = ((wei/hei)/hei)*10000
+            document.getElementById('result1').style.display = 'block';
+            if(hei < 140){
+                document.getElementById('result1').innerText = "당신은 6급입니다!";
+                document.getElementById('no_army').style.display='block';
+            }
+            else if(hei >= 140 && hei < 146){
+                document.getElementById('result1').innerText = "당신은 5급입니다!";
+                document.getElementById('no_army').style.display='block';
+
+            }
+            else if(hei >= 146 && hei < 159){
+                document.getElementById('result1').innerText = "당신은 4급입니다!";
+                document.getElementById('no_army').style.display='block';
+
+            }
+            else if(hei >= 159 && hei < 204){
+                
+                    if(bmi >= 20 && bmi <25){
+                        document.getElementById('result1').innerText = "당신은 1급입니다!";
+                        document.getElementById('army').style.display='block';
+                    }
+                    
+                    else if(bmi >= 18.5 && bmi <20){
+                        document.getElementById('result1').innerText = "당신은 2급입니다!";
+                        document.getElementById('army').style.display='block';
+                    }
+                    else if(bmi >= 25 && bmi <30){
+                        document.getElementById('result1').innerText = "당신은 2급입니다!";
+                        document.getElementById('army').style.display='block';
+                    }
+                    else if(bmi >= 16 && bmi <18.4){
+                        document.getElementById('result1').innerText = "당신은 3급입니다!";
+                        document.getElementById('army').style.display='block';
+                    }
+                    else if(bmi >= 30 && bmi <35){
+                        document.getElementById('result1').innerText = "당신은 3급입니다!";
+                        document.getElementById('army').style.display='block';
+                    }
+                    
+                    else{
+                document.getElementById('result1').innerText = "당신은 4급입니다!";
+                document.getElementById('no_army').style.display='block';
+                }
+                
+
+            }
+            else if(hei>=204){
+                document.getElementById('result1').innerText = "당신은 4급입니다!";
+                document.getElementById('no_army').style.display='block';
+            }
+            
+
+            }
+                   
+    </script>
+</body>
+</html>
